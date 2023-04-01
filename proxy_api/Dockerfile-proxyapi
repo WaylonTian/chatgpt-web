@@ -1,0 +1,8 @@
+FROM python:3.10.10-alpine3.17
+WORKDIR /work
+
+RUN pip install "fastapi<1.0" "uvicorn<0.22" "requests=2.28.2"
+COPY proxy_api/proxy_api.py .
+COPY proxy_api/models_response.json .
+
+CMD ["uvicorn", "proxy_api:app", "--host", "0.0.0.0", "--port", "5174"]
